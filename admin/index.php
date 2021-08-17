@@ -2,9 +2,11 @@
 
 include "init.php";
 include $tpl . "header.php";
+include "include/languages/english.php"
 
 ?>
 
+<?php echo langs("fr");?>
 
 Welcome To Index
 
