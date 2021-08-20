@@ -1,9 +1,9 @@
 <?php
 
-    $dsn = 'mysql:host=localhost;port=3307;dbname=shop';
+    $dsn = 'mysql:host=localhost;port=3306;dbname=shop';
 
     $user = 'root';
-    $pass = '';
+    $pass = '123456';
     $option =  array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
