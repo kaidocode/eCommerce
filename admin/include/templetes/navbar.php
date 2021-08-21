@@ -15,6 +15,10 @@
     <div class="collapse navbar-collapse" id="app-nav">
       <ul class="nav navbar-nav">
         <li><a href="#"><?php echo langs('CTEGORIES') ?></a></li>
+        <li><a href="#"><?php echo langs('ITEMS') ?></a></li>
+        <li><a href="#"><?php echo langs('MEMBERS') ?></a></li>
+        <li><a href="#"><?php echo langs('STATISTICS') ?></a></li>
+        <li><a href="#"><?php echo langs('LOGS') ?></a></li>
        
         
       </ul>

@@ -2,6 +2,7 @@
 
 body{
     background-color: #f4f4f4;
+    font-size: 16px;
 }
 
 
@@ -28,3 +29,16 @@ body{
 .login .btn {
     background-color: #008dde;
 }
+
+/* Start Bootstrap Stayling */
+
+.navbar {
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+.navbar-brand {
+    font-size: 1em;
+}
+
+/* End Bootstrap Stayling */
