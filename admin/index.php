@@ -1,5 +1,7 @@
 <?php 
 
+session_start();
+print_r($_SESSION);
 include "init.php";
 include "include/languages/english.php";
 include $tpl . "header.php";
