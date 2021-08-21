@@ -1,19 +1,19 @@
 <?php
 
-    $dsn = 'mysql:host=localhost;port=3306;dbname=shop';
+    $dsn = 'mysql:host=localhost;port=3307;dbname=shop';
 
     $user = 'root';
-    $pass = '123456';
+    $pass = '';
     $option =  array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
     );
 
     try {
-        $db=new PDO($dsn,$user,$pass,$option);
+        $con=new PDO($dsn,$user,$pass,$option);
         $q = "INSERT INTO users (UserName,Password,Email,FullName)VALUES('Ahmed','123456','O@gmail.com','nacer')";
-        //$db -> exec($q);
-        echo 'Datbase Connected';
+        //$con -> exec($q);
+        echo 'Datbase Connected'.'<br>';
     } catch (PDOException $e) {
         echo 'Failed : '.$e .' Error !!';
     }
