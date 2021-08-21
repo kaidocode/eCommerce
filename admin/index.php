@@ -1,11 +1,12 @@
 <?php 
 
 session_start();
-print_r($_SESSION);
-include "init.php";
-include "connect.php";
-include "include/languages/english.php";
-include $tpl . "header.php";
+$nonavbar = '';
+if (isset($_SESSION['Username'])) {
+    header('Location: dashboard.php');
+}
+
+include 'init.php';
 
 ?>
 
@@ -17,12 +18,14 @@ include $tpl . "header.php";
        
         // cheak if user exist in db
 
-        $stmt = $con -> prepare("SELECT UserName, Password FROM users WHERE UserName = ? AND Password = ? AND groupId = 1 ");
+        $stmt = $con -> prepare("SELECT Username, Password FROM users WHERE Username = ? AND Password = ? AND GroupeID = 1 ");
         $stmt -> execute(array($username, $hashpass));
         $count = $stmt->rowCount();
 
         if ($count>0) {
-            echo 'Welcome ' . $username;
+            $_SESSION['Username'] = $username;
+            header('Location: dashboard.php');
+            exit();
         }
         
     };

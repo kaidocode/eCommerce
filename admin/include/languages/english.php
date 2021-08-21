@@ -2,8 +2,8 @@
 
     function langs($phrase){
         static $lang = array(
-            'MESSAGE' => 'welcome',
-            'ADMIN' => 'admin'
+            'HOME' => 'Home',
+            'CTEGORIES' => 'Categories'
         );
         return $lang[$phrase];
     }
