@@ -39,6 +39,38 @@ body{
 
 .navbar-brand {
     font-size: 1em;
+    font-weight: bold;
+    transition: all 0.5s;
 }
+
+.navbar-nav>li>a {
+    font-weight: 600;
+}
+
+.navbar-nav>li {
+    transition: all 0.5s;
+}
+
+.dropdown-menu > li >a {
+    font-weight: 550;
+}
+
+.navbar-right:hover,.dropdown-menu > li >a:hover {
+    background-color:#82ccdd ;
+    color: #f4f4f4;
+}
+
+.dropdown-menu{
+    min-width: 180px;
+    padding: 0;
+    font-size: 1em;
+    font-weight: 1em;
+}
+
+
+
+
+
+
 
 /* End Bootstrap Stayling */

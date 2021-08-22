@@ -18,7 +18,7 @@ include 'init.php';
        
         // cheak if user exist in db
 
-        $stmt = $con -> prepare("SELECT Username, Password FROM users WHERE Username = ? AND Password = ? AND GroupeID = 1 ");
+        $stmt = $con -> prepare("SELECT Username, Password FROM users WHERE Username = ? AND Password = ? AND GroupID = 1 ");
         $stmt -> execute(array($username, $hashpass));
         $count = $stmt->rowCount();
 
