@@ -1,12 +1,15 @@
 <?php 
 
 $tpl = "include/templetes/";
+$lang = "include/languages/";
+$fanc = "include/functions/";
 $css = "layout/css/";
 $js = "layout/js/";
-$lang = "include/languages/";
+
 
 // import the main files
 include $lang.'english.php';
+include $fanc.'functions.php';
 include $tpl . 'header.php';
 include 'connect.php';
 

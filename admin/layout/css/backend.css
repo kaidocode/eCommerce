@@ -67,6 +67,12 @@ body{
     font-weight: 1em;
 }
 
+h1{
+    margin: 15px 0;
+    font-weight: 500;
+    color: #666;
+}
+
 
 
 

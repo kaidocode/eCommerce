@@ -2,6 +2,7 @@
 
 session_start();
 $nonavbar = '';
+$pageTitle='Login';
 if (isset($_SESSION['Username'])) {
     header('Location: dashboard.php');
 }
@@ -18,14 +19,17 @@ include 'init.php';
        
         // cheak if user exist in db
 
-        $stmt = $con -> prepare("SELECT Username, Password FROM users WHERE Username = ? AND Password = ? AND GroupID = 1 ");
+        $stmt = $con -> prepare("SELECT userId, Username, Password FROM users WHERE Username = ? AND Password = ? AND GroupID = 1 LIMIT 1");
         $stmt -> execute(array($username, $hashpass));
+        $row = $stmt -> fetch();
         $count = $stmt->rowCount();
 
         if ($count>0) {
             $_SESSION['Username'] = $username;
+            $_SESSION['Id'] = $row['userId'];
             header('Location: dashboard.php');
             exit();
+            
         }
         
     };
