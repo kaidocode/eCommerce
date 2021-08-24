@@ -7,4 +7,11 @@ $(function(){
     }).blur(function () {
         $(this).attr('placeholder', $(this).attr('data-text'));
     })
+
+    // Add Astresk required filed
+    $('input').each(function () {
+      if ($(this).attr('required') === 'required') {
+          $(this).after('<span class="astrisk">*</span>');
+      }
+    });
 });
