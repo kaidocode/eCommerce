@@ -14,4 +14,17 @@ $(function(){
           $(this).after('<span class="astrisk">*</span>');
       }
     });
+
+    // Convert Password filed To Text filed
+    var  passFiled = $('.password');
+     $('.show-pass').hover(function () {
+          passFiled.attr('type','text');
+     },function () {
+          passFiled.attr('type','password');
+     });
+
+     // Confermition Button On Click
+     $('.confirm').click(function () {
+        return confirm('Are You Sure?');
+     });
 });

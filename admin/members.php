@@ -9,10 +9,55 @@ if (isset($_SESSION['Username'])) {
 
 
     switch ($do) {
-        case 'Manage':
-            echo "You are in Manage page <br/>";
-            echo "<a href='?do=Add'>Add New Members</a>";
-            break;
+        case 'Manage'://Manage Members Page
+
+        $stmt = $con -> prepare("SELECT * FROM users WHERE groupId != 1");
+
+        $stmt -> execute();
+        $rows = $stmt->fetchAll();
+
+        ?>
+          <h1 class="text-center">Manage Members</h1>
+          <div class="container">
+            <div class=".table-responsive">
+              <table class="main-table text-center table">
+                <tr>
+                  <td>#ID</td>
+                  <td>User Name</td>
+                  <td>Email</td>
+                  <td>Full Name</td>
+                  <td>Register Date</td>
+                  <td>Control</td>
+                </tr>
+
+                <?php
+
+                  foreach ($rows as $row) {
+                    echo "<tr>";
+                    echo "<td>".$row['userId']."</td>";
+                    echo "<td>".$row['Username']."</td>";
+                    echo "<td>".$row['Email']."</td>";
+                    echo "<td>".$row['FullName']."</td>";
+                    echo "<td>12/12/2021</td>";
+                    echo '<td>
+                    <a href="?do=Edit&userId='.$row['userId'].'" class="btn btn-success">Edit</a>
+                    <a href="?do=Delete&userId='.$row['userId'].'"  class="btn btn-danger confirm">Delete</a>
+                    </td>';
+                    echo "</tr>";
+                  }
+                 ?>
+
+
+
+              </table>
+            </div>
+            <a href='?do=Add' class="btn btn-primary"><i class="fa fa-plus"></i> Add New Members</a>
+          </div>
+
+
+
+        <?php
+        break;
         case 'Add':
         ?>
 
@@ -32,7 +77,8 @@ if (isset($_SESSION['Username'])) {
                 <label class="col-sm-2 control-label">Password :</label>
                 <div class="col-sm-10 col-md-6">
 
-                    <input type="password" name="password" class="form-control" autocomplete="new-password" required="required">
+                    <input type="password" name="password" class="password form-control" autocomplete="new-password" required="required">
+                    <i class="show-pass fa fa-eye fa-2x"></i>
                 </div>
             </div>
             <!-- start email -->
@@ -60,7 +106,7 @@ if (isset($_SESSION['Username'])) {
         <?php
         break;
         case 'Edit':
-            $userId = isset($_GET['userId']) && is_numeric($_GET['userId']) && $_GET['userId'] == $_SESSION['Id'] ? intval($_GET['userId']) : 0 ;
+            $userId = isset($_GET['userId']) && is_numeric($_GET['userId']) ? intval($_GET['userId']) : 0 ;
             $stmt = $con -> prepare("SELECT * FROM users WHERE userId = ? LIMIT 1");
         $stmt -> execute(array($userId));
         $row = $stmt -> fetch();
@@ -173,11 +219,14 @@ if (isset($_SESSION['Username'])) {
 
               echo '<div class="alert alert-success">'.$stmt->rowCount() . ' Record Added</div>';
             }
+            echo "</div>";
           }else {
             echo "<h1 class='text-center'>Add New Members</h1>";
-              echo '<div class="alert alert-danger">Sorry You Cant brows This Page</div>';
+              echo '<div class="container">';
+              returnHome('Sorry You Cant brows This Page Derictely');
+              echo "</div>";
           }
-            echo "</div>";
+
         break;
         case 'Update':
             if ($_SERVER['REQUEST_METHOD'] =='POST') {
@@ -232,6 +281,29 @@ if (isset($_SESSION['Username'])) {
             }
             echo "</div>";
         break;
+
+        case 'Delete':
+
+            $userId = isset($_GET['userId']) && is_numeric($_GET['userId']) ? intval($_GET['userId']) : 0 ;
+            $stmt = $con -> prepare("SELECT * FROM users WHERE userId = ? LIMIT 1");
+            $stmt -> execute(array($userId));
+            
+            $count = $stmt->rowCount();
+            
+          if ($count > 0) {
+            $stmt = $con -> prepare("DELETE FROM users WHERE userId = :zuserId");
+            $stmt -> bindParam(":zuserId",$userId); 
+            $stmt -> execute();
+              echo "<h1 class='text-center'>Delete Members</h1>";
+              echo '<div class="container">';
+              echo '<div class="alert alert-success">'. $stmt->rowCount() . " Record Deleted</div>";
+              echo "</div>";
+
+          }
+            
+          
+        break;
+
         default:
            echo "You are in invlide page";
     }

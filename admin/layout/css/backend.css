@@ -85,7 +85,16 @@ h1{
   position: relative;
 }
 
+.show-pass {
+  position: absolute;
+  top: 6px;
+  right: -30px;
+}
 
+.main-table tr:first-child td{
+    background-color: #333;
+    color:#fff;
+}
 
 
 
