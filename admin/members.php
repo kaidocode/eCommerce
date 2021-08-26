@@ -40,8 +40,8 @@ if (isset($_SESSION['Username'])) {
                     echo "<td>".$row['FullName']."</td>";
                     echo "<td>12/12/2021</td>";
                     echo '<td>
-                    <a href="?do=Edit&userId='.$row['userId'].'" class="btn btn-success">Edit</a>
-                    <a href="?do=Delete&userId='.$row['userId'].'"  class="btn btn-danger confirm">Delete</a>
+                    <a href="?do=Edit&userId='.$row['userId'].'" class="btn btn-success"><i class="fa fa-edit"></i> Edit</a>
+                    <a href="?do=Delete&userId='.$row['userId'].'"  class="btn btn-danger confirm"><i class="fa fa-times"></i> Delete</a>
                     </td>';
                     echo "</tr>";
                   }
@@ -51,7 +51,7 @@ if (isset($_SESSION['Username'])) {
 
               </table>
             </div>
-            <a href='?do=Add' class="btn btn-primary"><i class="fa fa-plus"></i> Add New Members</a>
+            <a href='?do=Add' class="btn btn-primary"><i class="fa fa-plus"></i> New Members</a>
           </div>
 
 

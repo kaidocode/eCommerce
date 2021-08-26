@@ -3,6 +3,7 @@
 session_start();
 $nonavbar = '';
 $pageTitle='Login';
+
 if (isset($_SESSION['Username'])) {
     header('Location: dashboard.php');
 }
