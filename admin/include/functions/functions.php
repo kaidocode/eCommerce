@@ -25,3 +25,16 @@ function returnHome($error,$second = 3)
     exit();
     
 }
+
+/* 
+** function cheak items from database 
+*/
+
+function cheakItem($select,$from,$value)
+{
+    global $con;
+    $statment = $con -> prepare("SELECT $select FROM $from WHERE $select = ?");
+    $statment -> execute(array($value));
+    $count = $statment -> rowCount();
+    return $count;
+}

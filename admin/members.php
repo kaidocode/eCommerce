@@ -11,6 +11,8 @@ if (isset($_SESSION['Username'])) {
     switch ($do) {
         case 'Manage'://Manage Members Page
 
+         
+
         $stmt = $con -> prepare("SELECT * FROM users WHERE groupId != 1");
 
         $stmt -> execute();
@@ -212,12 +214,21 @@ if (isset($_SESSION['Username'])) {
             }
 
 
-            if (empty($formErrors)) {
-              $stmt = $con -> prepare("INSERT INTO users (username,email,fullname,password) VALUES (?,?,?,?)");
+            if (empty($formErrors) ) {
 
-              $stmt -> execute(array($User, $Email, $Name, $Password));
+              $cheak = cheakItem('username','users',$User);
 
-              echo '<div class="alert alert-success">'.$stmt->rowCount() . ' Record Added</div>';
+              if ($cheak == 1) {
+                echo '<div class="alert alert-danger">Sorry The User Name Is Already Exist</div>';
+              }else{
+
+             
+                $stmt = $con -> prepare("INSERT INTO users (username,email,fullname,password) VALUES (?,?,?,?)");
+
+                $stmt -> execute(array($User, $Email, $Name, $Password));
+
+                echo '<div class="alert alert-success">'.$stmt->rowCount() . ' Record Added</div>';
+              }
             }
             echo "</div>";
           }else {
