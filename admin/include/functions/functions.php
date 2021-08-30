@@ -12,16 +12,30 @@ function getTitle()
 }
 
 /*
-**  redirect to page home
+**  redirect to page home v 2.0
 **  except parametres
 **  default values 3 second 
 */
 
-function returnHome($error,$second = 3)
+function redirectHome($theMsg,$url = null,$second = 3)
 {
-    echo '<div class="alert alert-danger">'.$error.'</div>';
-    echo '<div class="alert alert-info">You Will be direct in : '.$second.' Second</div>';
-    header("refresh:$second,url=index.php");
+    if ($url === null) {
+        $url = 'index.php';
+        $link = 'Home Page';
+    }else{
+        if (isset($_SERVER["HTTP_REFERER"])&& $_SERVER["HTTP_REFERER"] !== '') {
+            $url = $_SERVER["HTTP_REFERER"];
+            $link = 'Previus Page';    
+        }else {
+            $url = 'index.php';
+            $link = 'Home Page';
+        }
+        
+
+    }
+    echo $theMsg;
+    echo "<div class='alert alert-info'>You Will be direct To $link in : $second Second</div>";
+    header("refresh:$second,url=$url");
     exit();
     
 }

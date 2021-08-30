@@ -9,7 +9,7 @@ if (isset($_SESSION['Username'])) {
 
 
     switch ($do) {
-        case 'Manage'://Manage Members Page
+        case 'Manage':/**********Manage Members Page******************/
 
          
 
@@ -160,7 +160,10 @@ if (isset($_SESSION['Username'])) {
             </div>
             <?php
         } else {
-            echo 'There Is No Such User';
+            echo '<div class="container">';
+            $theMsg = '<div class="alert alert-danger">There Is No Such User</div>';
+            redirectHome($theMsg);
+            echo '</div>';
         }
 
 
@@ -227,14 +230,17 @@ if (isset($_SESSION['Username'])) {
 
                 $stmt -> execute(array($User, $Email, $Name, $Password));
 
-                echo '<div class="alert alert-success">'.$stmt->rowCount() . ' Record Added</div>';
+                $theMsg = '<div class="alert alert-success">'.$stmt->rowCount() . ' Record Added</div>';
+
+                redirectHome($theMsg,'back');
               }
             }
             echo "</div>";
           }else {
             echo "<h1 class='text-center'>Add New Members</h1>";
               echo '<div class="container">';
-              returnHome('Sorry You Cant brows This Page Derictely');
+              $theMsg = '<div class="alert alert-danger">Sorry You Cant brows This Page Derictely</div>';
+              redirectHome($theMsg,'back');
               echo "</div>";
           }
 
@@ -284,11 +290,15 @@ if (isset($_SESSION['Username'])) {
 
                   $stmt -> execute(array($User, $Email, $Name, $pass, $Id));
 
-                  echo '<div class="alert alert-success">'.$stmt->rowCount() . " Record Updated</div>";
+                  $theMsg = '<div class="alert alert-success">'.$stmt->rowCount() . " Record Updated</div>";
+                  redirectHome($theMsg,'back');
                 }
 
                 } else {
-                echo "Sorry You Can't brows This Page ";
+                echo '<div class="container">';
+                $theMsg = "<div class='alert alert-danger'>Sorry You Can't brows This Page</div> ";
+                redirectHome($theMsg);
+                echo "</div>";
             }
             echo "</div>";
         break;
@@ -307,9 +317,15 @@ if (isset($_SESSION['Username'])) {
             $stmt -> execute();
               echo "<h1 class='text-center'>Delete Members</h1>";
               echo '<div class="container">';
-              echo '<div class="alert alert-success">'. $stmt->rowCount() . " Record Deleted</div>";
+              $theMsg =  '<div class="alert alert-success">'. $stmt->rowCount() . " Record Deleted</div>";
+              redirectHome($theMsg,'back');
               echo "</div>";
 
+          }else {
+            echo '<div class="container">';
+            $theMsg ="<div class='alert alert-danger'>There is no sush Id</div>";
+            redirectHome($theMsg);
+            echo "</div>";
           }
             
           
