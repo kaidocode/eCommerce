@@ -222,7 +222,8 @@ if (isset($_SESSION['Username'])) {
               $cheak = cheakItem('username','users',$User);
 
               if ($cheak == 1) {
-                echo '<div class="alert alert-danger">Sorry The User Name Is Already Exist</div>';
+                $theMsg = '<div class="alert alert-danger">Sorry The User Name Is Already Exist</div>';
+                redirectHome($theMsg,'back');
               }else{
 
              
