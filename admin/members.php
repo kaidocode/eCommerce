@@ -40,7 +40,7 @@ if (isset($_SESSION['Username'])) {
                     echo "<td>".$row['Username']."</td>";
                     echo "<td>".$row['Email']."</td>";
                     echo "<td>".$row['FullName']."</td>";
-                    echo "<td>12/12/2021</td>";
+                    echo "<td>".$row['Date']."</td>";
                     echo '<td>
                     <a href="?do=Edit&userId='.$row['userId'].'" class="btn btn-success"><i class="fa fa-edit"></i> Edit</a>
                     <a href="?do=Delete&userId='.$row['userId'].'"  class="btn btn-danger confirm"><i class="fa fa-times"></i> Delete</a>
@@ -169,7 +169,7 @@ if (isset($_SESSION['Username'])) {
 
         break;
 
-        case 'Insert':
+        case 'Insert':/**********Insert Members Page******************/
         if ($_SERVER['REQUEST_METHOD']=='POST') {
 
             $User = $_POST['username'];
@@ -226,7 +226,7 @@ if (isset($_SESSION['Username'])) {
               }else{
 
              
-                $stmt = $con -> prepare("INSERT INTO users (username,email,fullname,password) VALUES (?,?,?,?)");
+                $stmt = $con -> prepare("INSERT INTO users (username,email,fullname,password,date) VALUES (?,?,?,?,now())");
 
                 $stmt -> execute(array($User, $Email, $Name, $Password));
 
