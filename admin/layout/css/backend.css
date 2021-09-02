@@ -82,6 +82,25 @@ body{
     font-weight: 1em;
 }
 
+/*start Dashboard page*/
+.home-stats .stat {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    padding: 20px;
+    font-size: 15px;
+}
+
+.home-stats .stat span{
+    display: block;
+    font-size: 50px;
+}
+
+.latest{
+    margin-top: 30px;
+}
+
+/*start manage page*/
+
 h1{
     margin: 15px 0;
     font-weight: 500;
