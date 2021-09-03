@@ -4,16 +4,20 @@ $pageTitle='members';
 if (isset($_SESSION['Username'])) {
     include 'init.php';
 
-    $do = isset($_GET['do']) ? $_GET['do'] :'Manage'; // This If and Else Short ^_^
+    $do = isset($_GET['do']) ? $_GET['do'] :'Manage'; // This If and Else Short
 
 
 
     switch ($do) {
-        case 'Manage':/**********Manage Members Page******************/
-
+      /*********************************Manage Members Page**********************************/
+        case 'Manage':
+        $query = '';
+        if (isset($_GET['page'])&& $_GET['page']== 'Pending') {
+          $query = 'AND regstatus = 0';
+        }
          
 
-        $stmt = $con -> prepare("SELECT * FROM users WHERE groupId != 1");
+        $stmt = $con -> prepare("SELECT * FROM users WHERE groupId != 1 $query");
 
         $stmt -> execute();
         $rows = $stmt->fetchAll();
@@ -43,8 +47,11 @@ if (isset($_SESSION['Username'])) {
                     echo "<td>".$row['Date']."</td>";
                     echo '<td>
                     <a href="?do=Edit&userId='.$row['userId'].'" class="btn btn-success"><i class="fa fa-edit"></i> Edit</a>
-                    <a href="?do=Delete&userId='.$row['userId'].'"  class="btn btn-danger confirm"><i class="fa fa-times"></i> Delete</a>
-                    </td>';
+                    <a href="?do=Delete&userId='.$row['userId'].'"  class="btn btn-danger confirm"><i class="fa fa-times"></i> Delete</a>';
+                    if ($row['RegStatus'] == 0) {
+                      echo ' <a href="?do=Activate&userId='.$row['userId'].'"  class="btn btn-info"><i class="fa fa-times"></i> Activate</a>';
+                    }
+                    echo '</td>';
                     echo "</tr>";
                   }
                  ?>
@@ -60,7 +67,35 @@ if (isset($_SESSION['Username'])) {
 
         <?php
         break;
+        /**********************************  Activate Page *****************************************/
+        case 'Activate': 
+          $userId = isset($_GET['userId']) && is_numeric($_GET['userId']) ? intval($_GET['userId']) : 0 ;
+            $stmt = $con -> prepare("SELECT * FROM users WHERE userId = ? LIMIT 1");
+            $stmt -> execute(array($userId));
+            
+            $count = $stmt->rowCount();
+            
+          if ($count > 0) {
+            $stmt = $con -> prepare("UPDATE users SET regstatus = 1 WHERE userId = :zuserId");
+            $stmt -> bindParam(":zuserId",$userId); 
+            $stmt -> execute();
+              echo "<h1 class='text-center'>Activate Members</h1>";
+              echo '<div class="container">';
+              $theMsg =  '<div class="alert alert-success">'. $stmt->rowCount() . " Record Deleted</div>";
+              redirectHome($theMsg);
+              echo "</div>";
+
+          }else {
+            echo '<div class="container">';
+            $theMsg ="<div class='alert alert-danger'>There is no sush Id</div>";
+            redirectHome($theMsg);
+            echo "</div>";
+          }
+        break;
+        /***************************************  Add Page *************************************/
         case 'Add':
+
+        
         ?>
 
         <h1 class="text-center">Add New Members</h1>
@@ -107,6 +142,7 @@ if (isset($_SESSION['Username'])) {
         </div>
         <?php
         break;
+        /********************************************  Edit Page ***************************************/
         case 'Edit':
             $userId = isset($_GET['userId']) && is_numeric($_GET['userId']) ? intval($_GET['userId']) : 0 ;
             $stmt = $con -> prepare("SELECT * FROM users WHERE userId = ? LIMIT 1");
@@ -168,8 +204,8 @@ if (isset($_SESSION['Username'])) {
 
 
         break;
-
-        case 'Insert':/**********Insert Members Page******************/
+        /***************************************Insert Members Page***********************************/
+        case 'Insert':
         if ($_SERVER['REQUEST_METHOD']=='POST') {
 
             $User = $_POST['username'];
@@ -227,7 +263,7 @@ if (isset($_SESSION['Username'])) {
               }else{
 
              
-                $stmt = $con -> prepare("INSERT INTO users (username,email,fullname,password,date) VALUES (?,?,?,?,now())");
+                $stmt = $con -> prepare("INSERT INTO users (username,email,fullname,password,regstatus,date) VALUES (?,?,?,?,1,now())");
 
                 $stmt -> execute(array($User, $Email, $Name, $Password));
 
@@ -246,6 +282,7 @@ if (isset($_SESSION['Username'])) {
           }
 
         break;
+        /*************************************  Update Page ******************************/
         case 'Update':
             if ($_SERVER['REQUEST_METHOD'] =='POST') {
 
@@ -303,7 +340,7 @@ if (isset($_SESSION['Username'])) {
             }
             echo "</div>";
         break;
-
+        /***********************************  Delete Page *****************************************/
         case 'Delete':
 
             $userId = isset($_GET['userId']) && is_numeric($_GET['userId']) ? intval($_GET['userId']) : 0 ;

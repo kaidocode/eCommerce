@@ -84,19 +84,44 @@ body{
 
 /*start Dashboard page*/
 .home-stats .stat {
-    background-color: #eee;
-    border: 1px solid #ccc;
     padding: 20px;
     font-size: 15px;
+    font-weight: 700;
+    color:#f4f4f4;
+    border-radius: 10px;
+}
+
+.home-stats .stat a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.home-stats .st-members{
+    background-color: #74b9ff;
+}
+
+.home-stats .st-pending{
+    background-color: #fd79a8;
+}
+
+.home-stats .st-items{
+    background-color: #55efc4;
+}
+
+.home-stats .st-comments{
+    background-color: #a29bfe;
 }
 
 .home-stats .stat span{
     display: block;
-    font-size: 50px;
+    font-size: 60px;
 }
+
+
 
 .latest{
     margin-top: 30px;
+    font-weight: 700;
 }
 
 /*start manage page*/

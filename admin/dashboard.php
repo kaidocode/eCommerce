@@ -5,34 +5,35 @@ $pageTitle='Dashboard';
 if (isset($_SESSION['Username'])) {
     include 'init.php';
     /* Start Dashboard */
+    
     ?>
     
     <div class="container home-stats text-center">
         <h1>Dashboard</h1>
         <div class="row">
             <div class="col-md-3">
-                <div class="stat">
+                <div class="stat st-members">
                     Total Members
-                    <span>20</span>
+                    <span><a href="members.php"> <?php echo countItems('userId','users') ?></a></span>
                 </div>
             </div>
 
             <div class="col-md-3">
-                <div class="stat">
+                <div class="stat st-pending">
                     Pending Members
-                    <span>15</span>
+                    <span><a href="members.php?do=Manage&page=Pending"><?php echo cheakItem('regstatus','users',0)?></a></span>
                 </div>
             </div>
 
             <div class="col-md-3">
-                <div class="stat">
+                <div class="stat st-items">
                     Total Items
                     <span>1521</span>
                 </div>
             </div>
 
             <div class="col-md-3">
-                <div class="stat">
+                <div class="stat st-comments">
                     Total Comments
                     <span>1254</span>
                 </div>

@@ -52,3 +52,15 @@ function cheakItem($select,$from,$value)
     $count = $statment -> rowCount();
     return $count;
 }
+
+/* 
+** Function Count Items 
+*/
+
+function countItems($items,$table)
+{
+    global $con;
+    $stmt2 = $con -> prepare("SELECT COUNT($items) FROM $table");
+    $stmt2 -> execute();
+    return $stmt2 -> fetchColumn();
+}
