@@ -45,11 +45,21 @@ if (isset($_SESSION['Username'])) {
         <div class="row">
             <div class="col-sm-6">
                 <div class="panel panel-default">
+                    <?php $limit = 5?>
                     <div class="panel-heading">
-                        <i class="fa fa-users"></i> Latest Register Users
+                        <i class="fa fa-users"></i> Latest  <?php echo $limit ?> Register Users
                     </div>
                     <div class="panel-body">
-                        Test
+                        <ul class='list-unstyled latest-users'>
+                        <?php 
+                            $Latest = getLatest('userId,username','users','userid',$limit);
+                            foreach ( $Latest as $users) {
+                                echo '<li>'.$users['username'] . 
+                                '<span class="btn btn-success pull-right"><a href="members.php?do=Edit&userId='.$users['userId'] .'"><i class="fa fa-edit"></i>Edit</a></span>
+                                </li>';
+                            }
+                        ?>
+                        </ul>
                     </div>
                 </div>
             </div>

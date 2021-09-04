@@ -60,7 +60,21 @@ function cheakItem($select,$from,$value)
 function countItems($items,$table)
 {
     global $con;
-    $stmt2 = $con -> prepare("SELECT COUNT($items) FROM $table");
+    $stmt2 = $con -> prepare("SELECT COUNT($items) FROM $table WHERE  groupId != 1");
     $stmt2 -> execute();
     return $stmt2 -> fetchColumn();
+}
+
+
+/* 
+** Function Get Latest Items
+*/
+
+function getLatest( $select, $table, $order, $limit=5)
+{
+    global $con;
+    $getStmt = $con -> prepare("SELECT $select FROM $table ORDER BY $order DESC LIMIT $limit");
+    $getStmt -> execute();
+    $rows = $getStmt -> fetchAll();
+    return $rows;
 }

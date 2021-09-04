@@ -10,7 +10,7 @@ if (isset($_SESSION['Username'])) {
 
     switch ($do) {
       /*********************************Manage Members Page**********************************/
-        case 'Manage':
+        case 'Manage': 
         $query = '';
         if (isset($_GET['page'])&& $_GET['page']== 'Pending') {
           $query = 'AND regstatus = 0';

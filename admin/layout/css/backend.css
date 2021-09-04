@@ -124,6 +124,28 @@ body{
     font-weight: 700;
 }
 
+.latest-users {
+    margin-bottom: 0;
+}
+
+.latest-users li{
+    padding: 10px;
+    overflow: hidden;
+}
+
+.latest-users li:nth-child(odd){
+    background-color: #EEE;
+}
+
+.latest-users .btn-success{
+    padding: 2px 8px;
+}
+
+.latest-users li a{
+    color:#fff;
+    text-decoration: none;
+}
+
 /*start manage page*/
 
 h1{
@@ -168,6 +190,8 @@ h1{
 .main-table .btn {
     padding: 3px 10px;
 }
+
+
 
 
 
