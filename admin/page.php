@@ -16,13 +16,13 @@
             echo "<a href='?do=Insert'>Add new category</a>";
             break;
         case 'Add':
-            echo "You are in add page";
+            echo "You are in add page now";
             break;
         case 'Insert':
-            echo "You are in Insert page";
+            echo "You are in Insert page now";
             break;
         default:
-           echo "You are in invlide page";
+           echo "You are on invlide page now";
     }
 
 
