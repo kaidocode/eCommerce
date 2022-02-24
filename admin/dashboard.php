@@ -1,7 +1,7 @@
 <?php 
 
 session_start();
-$pageTitle='Dashboard';
+$pageTitle='Main Dashboard';
 if (isset($_SESSION['Username'])) {
     include 'init.php';
     /* Start Dashboard */
